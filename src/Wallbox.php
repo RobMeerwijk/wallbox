@@ -548,6 +548,16 @@ class Wallbox
     }
 
     /**
+     * addedEnergy (currrent charging session)
+     */
+    public function addedEnergy(int $ID): float
+    {
+       $chargerStatus = json_decode($this->getFullChargerStatus($ID));
+       ($this->getStatusName($chargerStatus->status_id) == 'CHARGING' || $this->getStatusName($chargerStatus->status_id) == 'DISCHARGING' ) ? $added_energy = $chargerStatus->added_energy : $added_energy = 0;
+       return $added_energy;
+    }
+    
+    /**
      * makeAPICall
      * Makes the API Call
      */
