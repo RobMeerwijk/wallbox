@@ -243,6 +243,14 @@ class Wallbox
     }
 
     /**
+     * getAllTimeUsage
+     */
+    public function getAllTimeUsage(int $id): string
+    {
+        return $this->convertSeconds($this->returnUsageInMinutes($this->getAllTimeData($id)));
+    }
+
+    /**
      * getSevenDaysUsage
      */
     public function getSevenDaysUsage(int $id): string
@@ -307,6 +315,14 @@ class Wallbox
     }
 
     /**
+     * getAllTimeEnergyUsage
+     */
+    public function getAllTimeEnergyUsage(int $id): float
+    {
+        return $this->returnEnergyUsage($this->getAllTimeData($id));
+    }
+
+    /**
      * getLastMonthCount
      */
     public function getLastMonthCount(int $id): int
@@ -344,6 +360,14 @@ class Wallbox
     private function getThisYearData(int $id): \stdClass
     {
         return json_decode($this->getStats($id, strtotime('1/1/' . date('Y'), time()), strtotime('12/31/' . date('Y'), time())));
+    }
+
+    /**
+     * getAllTimeData
+     */
+    private function getAllTimeData(int $id): \stdClass
+    {
+        return json_decode($this->getStats($id, strtotime('1/1/1970', time()), time() ));
     }
 
     /**
