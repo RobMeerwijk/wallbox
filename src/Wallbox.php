@@ -555,6 +555,7 @@ class Wallbox
        $chargerStatus = json_decode($this->getFullChargerStatus($ID));
        return ($this->getStatusName($chargerStatus->status_id) == 'CHARGING' || 
                $this->getStatusName($chargerStatus->status_id) == 'DISCHARGING' || 
+               $this->getStatusName($chargerStatus->status_id) == 'WAITING' || 
                $this->getStatusName($chargerStatus->status_id) == 'PAUSED' ) ?
                       $chargerStatus->added_energy : 0;
     }
