@@ -553,10 +553,12 @@ class Wallbox
     public function addedEnergy(int $ID): float
     {
        $chargerStatus = json_decode($this->getFullChargerStatus($ID));
-       return ($this->getStatusName($chargerStatus->status_id) == 'CHARGING' || 
+       return (
+               $this->getStatusName($chargerStatus->status_id) == 'CHARGING' || 
                $this->getStatusName($chargerStatus->status_id) == 'DISCHARGING' || 
                $this->getStatusName($chargerStatus->status_id) == 'WAITING' || 
-               $this->getStatusName($chargerStatus->status_id) == 'PAUSED' ) ?
+               ($this->getStatusName($chargerStatus->status_id) == 'PAUSED' && $chargerStatus->status_id<>189)
+               ) ?
                       $chargerStatus->added_energy : 0;
     }
     
