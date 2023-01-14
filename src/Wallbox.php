@@ -556,8 +556,8 @@ class Wallbox
        return (
                $this->getStatusName($chargerStatus->status_id) == 'CHARGING' || 
                $this->getStatusName($chargerStatus->status_id) == 'DISCHARGING' || 
-               $this->getStatusName($chargerStatus->status_id) == 'WAITING' || 
-               ($this->getStatusName($chargerStatus->status_id) == 'PAUSED' && $chargerStatus->status_id<>189)
+               $this->getStatusName($chargerStatus->status_id) == 'PAUSED' || 
+               ($this->getStatusName($chargerStatus->status_id) == 'WAITING' && $chargerStatus->status_id<>189)
                ) ?
                       $chargerStatus->added_energy : 0;
     }
